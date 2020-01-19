@@ -1,0 +1,116 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<h1>Cadastro de Usuários</h1>
+<h4><a href="#usuariolist"> Lista de Usuários <img alt="Novo" src="resources/img/list-icon.png" border="0"></h4>
+</a>
+
+<br />
+
+<div class="col-lg-9 col-md-8"  ng-init="carregarFuncaos();carregarPerfils();">
+	<div class="card">
+		<div class="content">
+			<form id="formUsuario" ng-submit="salvarUsuario();">
+				<div class="row">
+				
+					<div class="col-md-3">
+						<div class="form-group">
+							<label>Id</label> <input type="text" ng-model="usuario.id"
+								class="form-control border-input" disabled />
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Nome</label> <input type="text" ng-model="usuario.nome"
+								class="form-control border-input" placeholder="Nome"
+								required="required">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Email</label> <input type="text" ng-model="usuario.email"
+								class="form-control border-input" placeholder="Email"
+								required="required">
+						</div>
+
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-5">
+						<div class="form-group">
+							<label>Telefone</label> <input type="text" id="telefone"
+								ng-model="usuario.telefone" class="form-control border-input"
+								placeholder="Telefone" required="required">
+
+						</div>
+					</div>
+					
+					
+					<div class="col-md-6">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>Cpf</label> 
+								<input type="text" class="form-control" id="cpf" name="cpf" ng-model="usuario.cpf" >						
+							</div>
+						</div>
+					</div>
+					
+					
+					<div class="col-md-1">
+						<div class="form-group">
+							<label>Ativo</label> 
+							<input type="checkbox" class="form-control" ng-model="usuario.ativo">						
+						</div>
+					</div>
+				</div>
+								
+				<div class="row">
+					<div class="col-md-3">
+						<div class="form-group"> 
+						   <label>Função</label> 
+							<select ng-model="usuario.funcaos.id"
+							 id="selectFuncaos"
+							  class="form-control"> 
+							  <option value="">Selecione</option> 
+							  <option
+							  	ng-repeat="func in dataFuncaos"  
+							  	value="{{func.id}}">{{func.nomeFuncao}}
+							  </option>
+							</select>	
+						</div>
+					</div>
+					
+					<div class="col-md-5">
+						<div class="form-group"> 
+						   <label>Perfil</label> 
+							<select id="selectPerfils" ng-model="usuario.perfils.id" 
+							class="form-control"> 
+							<option value="">Selecione</option>
+							  <option
+								  ng-repeat="perf in dataPerfils"
+								  value="{{perf.id}}">{{perf.nomePerfil}}</option>
+							</select>	
+						</div>
+					</div>
+					
+				</div>
+				
+				<input type="hidden" id="edicao" name="edicao" value="">
+				
+				<button type="submit" class="btn btn-info btn-fill btn-wd">Cadastrar</button>
+				<button type="submit" class="btn btn-info btn-fill btn-wd"
+					ng-click="$scope.usuario={}">Limpar</button>
+				<button type="button" class="btn btn-info btn-fill btn-wd" onclick="history.go(-1);">Voltar</button>
+			</form>
+		</div>
+	</div>
+ <script type="text/javascript">
+ 	$('#telefone').mask('(99) 9999-9999');
+ 	$('#cpf').mask('999.999.999-99');
+ </script>	
+</html>

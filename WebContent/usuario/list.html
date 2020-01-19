@@ -1,0 +1,78 @@
+<html ng-app="candidato">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<h1>Lista de Usuários</h1>
+
+<h4><a href="#usuario/cadastro">Novo
+<img alt="Novo" src="resources/img/add-icon.png" border="0">
+</a></h4>
+
+<br/>
+	<!--<input class="form-control" type="text" ng-model="filtro">-->
+	<div class="col-md-6" ng-init="carregarPerfils();">
+		<div class="form-group">
+		<label>Nome</label> <input type="text" ng-model="filtro" class="form-control border-input" placeholder="Nome">
+		</div>
+	</div>
+	<div class="col-md-5">
+		<div class="form-group"> 
+			<label>Situação</label> 
+				<select ng-model="" id="selectSituacaos" class="form-control"> 
+					<option value="">Selecione</option> 
+					<option value="Todos">Todos</option>
+					<option value="Habilitado">Habilitado</option>
+					<option value="Desabilitado">Desabilitado</option>
+				</select>	
+			</div>
+		</div>
+	</div>	
+	<div class="col-md-5">
+		<div class="form-group"> 
+		   <label>Perfil</label> 
+				<select id="selectPerfils" ng-model="usuario.perfils.id" class="form-control"> 
+					<option value="">Selecione</option>
+					 <option ng-repeat="perf in dataPerfils" value="{{perf.id}}">{{perf.nomePerfil}}</option>
+				</select>	
+		</div>
+	</div>
+	<button type="button" class="btn btn-info btn-fill btn-wd">Filtrar</button>
+<br/>
+
+<div ng-controller="usuarioController" ng-init="listarUsuarios(1)">
+
+	<div class="content table-responsive table-full-width">
+		<table class="table table-hover">
+			<thead>
+				<!--<th>ID</th>-->
+				<th>Email</th>
+				<th>Nome</th>
+				<th>Perfil</th>
+				<th>Habilitado</th>
+				<th>Remover</th>
+				<th>Editar</th>
+			</thead>
+			<tbody>
+				<tr ng-repeat="usuario in data | filter:filtro"> 
+					<!--<td>{{usuario.id}}</td> -->
+					<td>{{usuario.email}}</td>
+					<td>{{usuario.nome}}</td>
+					<td>{{usuario.perfils.nomePerfil}}</td>
+					<td><input type="checkbox" class="form-control" ng-model="usuario.ativo" ng-click="chavearUsuario(usuario.id,usuario.ativo, usuario.nome);"></td>
+					<td> <a href id="#btn-apagar" ng-click="removerUsuario(usuario.id,usuario.nome);">Apagar
+					 <img alt="Remover" src="resources/img/delete-icon.png" border="0">
+					</a></td>
+					<td> <a href ng-click="editarUsuario(usuario.id);">Editar
+					 <img alt="Editar" src="resources/img/edit-icon.png" border="0">
+					</a></td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="text-center" ng-hide="ocultarNavegacao">
+		   <button type="button" class="btn btn-info btn-fill btn-wd" ng-click="anterior();">Anterior</button>
+		   <button type="button" class="btn btn-info btn-fill btn-wd" ng-click="proximo();">Próximo</button>
+		</div>   
+	</div>
+
+</div>
+</html>
